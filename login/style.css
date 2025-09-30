@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+*{  
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: cursive;
+}
+
+body{
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+/*Fo reszek*/
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 110vh;
+    background: #fff;
+}
+
+.form-box{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 512px;
+    height: 110vh;
+    overflow: hidden;
+    z-index: 2;
+}
+
+/*Kontenerek*/
+
+.login-container{
+    position: absolute;
+    left: 0px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    transition: .5s ease-in-out;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+.register-container{
+    position: absolute;
+    right: -520px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    transition: .5s ease-in-out;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.password-container{
+    position: absolute;
+    left: -520px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    transition: .5s ease-in-out;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+@media only screen and (max-width: 540px) {
+    .wrapper{
+        min-height: 100vh;
+    }
+    .form-box{
+        width: 100%;
+        height: 500px;
+    }
+    .register-container, .login-container , .password-container{
+        width: 100%;
+        padding: 0 20px;
+    }
+    .register-container{
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+/*Gombok*/
+
+#registerBtn{
+    font-size: 15px;
+    margin-right: 10px;
+    float: right;
+}
+
+#loginBtn{
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.lo-reg-btn .btn{
+    width: 200px;
+    height: 40px;
+    font-weight: 500;
+    background: #fff;
+    border: 1px solid black;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+
+.submit{
+    font-size: 15px;
+    font-weight: 500;
+    color: black;
+    height: 45px;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 30px;
+    outline: none;
+    background: #fff;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+/*Hoverek*/
+
+.link:hover, .active{
+    border-bottom: 2px solid #000;
+}
+
+.btn:hover{
+    background: #fff;
+}
+
+.btn.btn.white-btn:hover{
+    background: #fff;
+    box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
+}
+
+.input-field:hover, .input-field:focus{
+    background: #fff;
+}
+
+.submit:hover{
+    background: #fff;
+    box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
+}
+
+.two label a:hover{
+    text-decoration: underline;
+}
+
+#passBtn:hover{
+    box-shadow: none;
+}
+
+/*Div*/
+
+.input-field{
+    font-size: 15px;
+    background: #fff;
+    color: #000;
+    height: 50px;
+    width: 100%;
+    padding: 0 10px 0 45px;
+    border: 1px solid black;
+    border-radius: 30px;
+    outline: none;
+    transition: .2s ease;
+}
+
+/*Iconok*/
+
+.input-box i{
+    position: relative;
+    top: -35px;
+    left: 17px;
+    color: #000;
+}
+
+/*Csuszka eltuntetes*/
+
+input[type="number"]::-webkit-inner-spin-button ,
+input[type="number"]::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+}
+
+/*Also szovegek*/
+
+.two-col{
+    display: flex;
+    justify-content: space-between;
+    color: #000;
+    font-size: small;
+    margin-top: 15px;
+}
+.two-col .one{
+    display: flex;
+    gap: 5px;
+}
+.two label a{
+    text-decoration: none;
+    color: #000;
+}
+
+/*Cimek*/
+
+header{
+    color: #000;
+    font-size: 30px;
+    text-align: center;
+    padding: 10px 0 30px 0;
+}
