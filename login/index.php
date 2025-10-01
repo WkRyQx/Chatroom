@@ -31,15 +31,26 @@
                 <i class="fa-solid fa-lock"></i>
             </div>
             <div class="input-box">
-                <select class="input-field" required>
-                    <option value="">Válassz iskolát</option>
-                    <option value="boros">Boros Sámuel Technikum</option>
-                    <option value="pollak">Pollák Antal Technikum</option>
-                    <option value="zsoldos">Zsoldos Ferenc Technikum</option>
-                    <option value="horvath">Horváth Mihály Gimnázium</option>
-                </select>
-                <i class="fa-solid fa-school"></i>
+                <div class="dropdown">
+                    <input type="text" class="textBox"  placeholder="Válassz iskolát" required readonly>
+                    <i class="fa-solid fa-school"></i>
+                    <div class="option">
+                        <div onclick="show('Boros Sámuel Technikum')">
+                            Boros Sámuel Technikum
+                        </div>
+                        <div onclick="show('Pollák Antal Technikum')">
+                            Pollák Antal Technikum
+                        </div>
+                        <div onclick="show('Zsoldos Ferenc Technikum')">
+                            Zsoldos Ferenc Technikum
+                        </div>
+                        <div onclick="show('Horváth Mihály Technikum')">
+                            Horváth Mihály Technikum
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div class="input-box">
                 <input type="submit" class="submit" value="Bejelentkezés">
             </div>
@@ -80,22 +91,38 @@
                 <i class="fa-solid fa-child"></i>
             </div>
             <div class="input-box">
-                <select class="input-field" required>
-                    <option value="">Válassz nemet</option>
-                    <option value="ferfi">Férfi</option>
-                    <option value="no">Nő</option>
-                </select>
-                <i class="fa-solid fa-restroom"></i>
+                <div class="dropdown">
+                    <input type="text" class="textBox"  placeholder="Válassz nemet" required readonly>
+                    <i class="fa-solid fa-restroom"></i>
+                    <div class="option">
+                        <div onclick="show('Férfi')">
+                            Férfi
+                        </div>
+                        <div onclick="show('Nő')">
+                            Nő
+                        </div>  
+                    </div>
+                </div>
             </div>
             <div class="input-box">
-                <select class="input-field" required>
-                    <option value="">Válassz iskolát</option>
-                    <option value="boros">Boros Sámuel Technikum</option>
-                    <option value="pollak">Pollák Antal Technikum</option>
-                    <option value="zsoldos">Zsoldos Ferenc Technikum</option>
-                    <option value="horvath">Horváth Mihály Gimnázium</option>
-                </select>
-                <i class="fa-solid fa-school"></i>
+                <div class="dropdown">
+                    <input type="text" class="textBox"  placeholder="Válassz iskolát" required readonly>
+                    <i class="fa-solid fa-school"></i>
+                    <div class="option">
+                        <div onclick="show('Boros Sámuel Technikum')">
+                            Boros Sámuel Technikum
+                        </div>
+                        <div onclick="show('Pollák Antal Technikum')">
+                            Pollák Antal Technikum
+                        </div>
+                        <div onclick="show('Zsoldos Ferenc Technikum')">
+                            Zsoldos Ferenc Technikum
+                        </div>
+                        <div onclick="show('Horváth Mihály Technikum')">
+                            Horváth Mihály Technikum
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="input-box">
                 <input type="submit" class="submit" value="Regisztráció">

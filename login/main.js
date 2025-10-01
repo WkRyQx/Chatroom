@@ -1,3 +1,4 @@
+//Valtas animacio
 var a = document.getElementById("loginBtn");
 var b = document.getElementById("registerBtn");
 var l = document.getElementById("passBtn");
@@ -39,6 +40,8 @@ function Jelszo() {
     p.style.opacity = 1;
 }
 
+
+//Eletkor
 const input = document.getElementById("myNumber");
 input.addEventListener("input", () => {
   if (input.value.length > 2) {
@@ -53,4 +56,49 @@ input.addEventListener("blur", () => {
   if (isNaN(value)) return; 
   if (value < min) input.value = min;
   if (value > max) input.value = max;
+});
+
+
+//Lenyilo valasztasnal
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.dropdown').forEach(dropdown => {
+    const input = dropdown.querySelector('.textBox');
+    const optionBox = dropdown.querySelector('.option');
+    if (!input || !optionBox) return;
+
+    const options = optionBox.querySelectorAll('div');
+    if (options.length === 0) return;
+    
+    input.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle('active');
+
+      
+      const rect = input.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const spaceAbove = rect.top;
+
+      if (spaceBelow < optionBox.offsetHeight && spaceAbove > spaceBelow) {
+        optionBox.style.top = 'auto';
+        optionBox.style.bottom = `${input.offsetHeight}px`;
+      } else {
+        optionBox.style.top = `${input.offsetHeight}px`;
+        optionBox.style.bottom = 'auto';
+      }
+    });
+
+   
+    options.forEach(option => {
+      option.addEventListener('click', (e) => {
+        input.value = option.innerText.trim();  
+        dropdown.classList.remove('active');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+      }
+    });
+  });
 });
