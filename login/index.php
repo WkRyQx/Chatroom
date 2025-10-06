@@ -27,29 +27,11 @@
                 <i class="fa-solid fa-envelope"></i>
             </div>
             <div class="input-box">
-                <input type="password" class="input-field" placeholder="Jelszó" required>
+                <input type="password" class="input-field" placeholder="Jelszó" id="szoveg" required>
                 <i class="fa-solid fa-lock"></i>
+                <img src="eye-closed.png" id="szem" onclick="ShowPass()">
             </div>
-            <div class="input-box">
-                <div class="dropdown">
-                    <input type="text" class="textBox"  placeholder="Válassz iskolát" required readonly>
-                    <i class="fa-solid fa-school"></i>
-                    <div class="option">
-                        <div onclick="show('Boros Sámuel Technikum')">
-                            Boros Sámuel Technikum
-                        </div>
-                        <div onclick="show('Pollák Antal Technikum')">
-                            Pollák Antal Technikum
-                        </div>
-                        <div onclick="show('Zsoldos Ferenc Technikum')">
-                            Zsoldos Ferenc Technikum
-                        </div>
-                        <div onclick="show('Horváth Mihály Technikum')">
-                            Horváth Mihály Technikum
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
 
             <div class="input-box">
                 <input type="submit" class="submit" value="Bejelentkezés">
