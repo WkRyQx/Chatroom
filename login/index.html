@@ -13,12 +13,11 @@
  <div class="wrapper">
     <div class="form-box"> 
 
-
         <div class="login-container" id="login">
             <div class="top">
                 <div class="lo-reg-btn">
-                    <button class="btn white-btn" id="loginBtn" onclick="login()">Sign In</button>
-                    <button class="btn white-btn" id="registerBtn" onclick="register()">Sign Up</button>
+                    <button class="btn white-btn loginBtn" onclick="login()">Bejelentkezés</button>
+                    <button class="btn registerBtn" onclick="register()">Regisztráció</button>
                 </div>
                 <header>Bejelentkezés</header>
             </div>
@@ -27,12 +26,10 @@
                 <i class="fa-solid fa-envelope"></i>
             </div>
             <div class="input-box">
-                <input type="password" class="input-field" placeholder="Jelszó" id="szoveg" required>
+                <input type="password" class="input-field" placeholder="Jelszó" id="show1" required>
                 <i class="fa-solid fa-lock"></i>
-                <img src="eye-closed.png" id="szem" onclick="ShowPass()">
+                <i class="fa-solid fa-eye" id="toggle1"></i>
             </div>
-        
-
             <div class="input-box">
                 <input type="submit" class="submit" value="Bejelentkezés">
             </div>
@@ -42,7 +39,7 @@
                     <label for="login-check"> Emlékezz rám</label>
                 </div>
                 <div class="two">
-                    <label><a href="#" class="btn white-btn" id="passBtn" onclick="Jelszo()" >Elfelejtetted a jelszavad?</a></label>
+                    <label><a href="#" class="btn white-btn" class="passBtn" onclick="Jelszo()" >Elfelejtetted a jelszavad?</a></label>
                 </div>
             </div>
         </div>
@@ -51,26 +48,31 @@
         <div class="register-container" id="register">
             <div class="top">
                 <div class="lo-reg-btn">
-                    <button class="btn white-btn" id="loginBtn" onclick="login()">Sign In</button>
-                    <button class="btn" id="registerBtn" onclick="register()">Sign Up</button>
+                    <button class="btn white-btn loginBtn" onclick="login()">Bejelentkezés</button>
+                    <button class="btn registerBtn" onclick="register()">Regisztráció</button>
                 </div>
                 <header>Regisztráció</header>
             </div>
             <div class="input-box">
                 <input type="email" class="input-field" placeholder="Email" required>
-                <i class="fa-solid fa-envelope"></i>
+                <i class="fa-solid fa-envelope left-icon"></i>
             </div>
             <div class="input-box">
-                <input type="password" class="input-field" placeholder="Jelszó" required>
-                <i class="fa-solid fa-lock"></i>
+                <input type="password" class="input-field" placeholder="Jelszó" id="show2" required>
+                <i class="fa-solid fa-lock left-icon"></i>
+                <i class="fa-solid fa-eye" id="toggle2"></i>
             </div>
             <div class="input-box">
                 <input type="text" class="input-field" placeholder="Felhasználónév" required>
-                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-user left-icon"></i>
+            </div>
+            <div class="input-box">
+                <input type="number" class="input-field" placeholder="Om-azonositó" required>
+                <i class="fa-solid fa-user left-icon"></i>
             </div>
             <div class="input-box">
                 <input type="number" class="input-field" id="myNumber" placeholder="Életkor" min="14" max="20" required>
-                <i class="fa-solid fa-child"></i>
+                <i class="fa-solid fa-child left-icon"></i>
             </div>
             <div class="input-box">
                 <div class="dropdown">
@@ -116,7 +118,7 @@
             <header>Jelszó visszaállitás</header>
             <div class="input-box">
                 <input type="email" class="input-field" placeholder="Email" required>
-                <i class="fa-solid fa-envelope"></i>
+                <i class="fa-solid fa-envelope left-icon"></i>
             </div>
             <div class="input-box">
                 <input type="submit" class="submit" value="Küldés">

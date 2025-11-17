@@ -1,45 +1,52 @@
-//Valtas animacio
-var a = document.getElementById("loginBtn");
-var b = document.getElementById("registerBtn");
-var l = document.getElementById("passBtn");
-var x = document.getElementById("login");
-var y = document.getElementById("register");
+     // Valtas animacio
+var a = document.getElementsByClassName("loginBtn");
+var b = document.getElementsByClassName("registerBtn");
+var c = document.getElementsByClassName("passBtn");
+var l = document.getElementById("login");
+var r = document.getElementById("register");
 var p = document.getElementById("pass");
-
 function login() {
-    x.style.left = "0px";
-    y.style.right = "-520px";
+
+    l.style.display = "flex";
+    r.style.display = "none";
+    p.style.display = "none";
+ 
+    l.style.left = "0px";
+    r.style.right = "-520px";
     p.style.left = "-520px";
-    a.className += " white-btn";
-    b.className = "btn";
-    l.className = "btn";
-    x.style.opacity = 1;
-    p.style.opacity = 0;
-    y.style.opacity = 0;
+
+    a.className = "btn white-btn loginBtn"; 
+    b.className = "btn registerBtn";        
+    c.className = "btn passBtn";            
 }
 function register() {
-    x.style.left = "-520px";
-    y.style.right = "0px";
+
+    l.style.display = "none";
+    r.style.display = "flex";
+    p.style.display = "none";
+
+    l.style.left = "-520px";
+    r.style.right = "0px";
     p.style.left = "-520px";
-    a.className = "btn";
-    b.className += " white-btn";
-    l.className = "btn";
-    x.style.opacity = 0;
-    p.style.opacity = 0;
-    y.style.opacity = 1;
+
+    a.className = "btn loginBtn";             
+    b.className = "btn white-btn registerBtn"; 
+    c.className = "btn passBtn";              
 }
 function Jelszo() {
-    x.style.left = "-520px";
-    y.style.right = "-520px";
-    p.style.left = "0px";
-    a.className = "btn";
-    b.className = "btn";
-    l.className += " white-btn";
-    x.style.opacity = 0;
-    y.style.opacity = 0;
-    p.style.opacity = 1;
-}
+  
+    l.style.display = "none";
+    r.style.display = "none";
+    p.style.display = "flex";
 
+    l.style.left = "-520px";
+    r.style.right = "-520px";
+    p.style.left = "0px";
+
+    a.className = "btn loginBtn";             
+    b.className = "btn registerBtn";          
+    c.className = "btn white-btn passBtn";    
+}
 
 //Eletkor
 const input = document.getElementById("myNumber");
@@ -101,4 +108,41 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+});
+
+//PasswordShow
+document.addEventListener('DOMContentLoaded', function() {
+    const password = document.getElementById("show1");
+    const toggle = document.getElementById("toggle1");
+    if (password && toggle) {
+        toggle.addEventListener("click", () => {
+            if (password.type === "password") {
+                password.type = "text";
+                toggle.classList.remove("fa-eye");
+                toggle.classList.add("fa-eye-slash");
+            } else {
+                password.type = "password";
+                toggle.classList.remove("fa-eye-slash");
+                toggle.classList.add("fa-eye");
+            }
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const password2 = document.getElementById("show2");
+    const toggle2 = document.getElementById("toggle2");
+    if (password2 && toggle2) {
+        toggle2.addEventListener("click", () => {
+            if (password2.type === "password") {
+                password2.type = "text";
+                toggle2.classList.remove("fa-eye");
+                toggle2.classList.add("fa-eye-slash");
+            } else {
+                password2.type = "password";
+                toggle2.classList.remove("fa-eye-slash");
+                toggle2.classList.add("fa-eye");
+            }
+        });
+    }
 });

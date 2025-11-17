@@ -1,0 +1,11 @@
+Felhasznalo( id , email , neve , iskola , om_aazonosito , neme , jelszo , mikor_keszult , szerepkor_id)
+Uzenetek( uzenet_id , tartalom , mikor_keszult , id)
+Szerepkor( szerepkor_id , megnevezes )
+Velemeny( velemeny_id , tartalom , mikor_keszult , id)
+Reakciok( reakcio_id , emoji , mikor_keszult )
+
+
+
+Reagalas a velemenyre( reakcio_id , velemeny_id )
+Reagal( id , reakcio_id )
+Reagalas az uzenetre(  reakcio_id , uzenet_id )

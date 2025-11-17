@@ -16,7 +16,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 110vh;
+    min-height: 100vh;
     background: #fff;
 }
 
@@ -26,7 +26,7 @@ body{
     align-items: center;
     justify-content: center;
     width: 512px;
-    height: 110vh;
+    height: auto;
     overflow: hidden;
     z-index: 2;
 }
@@ -34,74 +34,63 @@ body{
 /*Kontenerek*/
 
 .login-container{
-    position: absolute;
+    display: flex;
+    position: relative;
     left: 0px;
     width: 500px;
-    display: flex;
     flex-direction: column;
-    transition: .5s ease-in-out;
+    transition: left 0.5s ease-in-out, right 0.5s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
     border: 1px solid black;
     border-radius: 20px;
     box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
     padding: 20px;
+
 }
 
 .register-container{
-    position: absolute;
+    display: none;
+    position: relative;
     right: -520px;
     width: 500px;
-    display: flex;
     flex-direction: column;
-    transition: .5s ease-in-out;
+    transition: left 0.5s ease-in-out, right 0.5s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
     border: 1px solid black;
     border-radius: 20px;
     box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    margin-bottom: 50px;
+    padding: 10px 15px 10px 15px;
+
 }
 
 .password-container{
-    position: absolute;
+    display: none;
+    position: relative;
     left: -520px;
     width: 500px;
-    display: flex;
     flex-direction: column;
-    transition: .5s ease-in-out;
+    transition: left 0.5s ease-in-out, right 0.5s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
     border: 1px solid black;
     border-radius: 20px;
     box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
-    padding: 20px;
+    padding: 20px;   
 }
 
-@media only screen and (max-width: 540px) {
-    .wrapper{
-        min-height: 100vh;
-    }
-    .form-box{
-        width: 100%;
-        height: 500px;
-    }
-    .register-container, .login-container , .password-container{
-        width: 100%;
-        padding: 0 20px;
-    }
-    .register-container{
-        flex-direction: column;
-        gap: 0;
-    }
-}
 
 /*Gombok*/
 
-#registerBtn{
+.registerBtn{
     font-size: 15px;
     margin-right: 10px;
-    float: right;
 }
 
-#loginBtn{
+.loginBtn{
     font-size: 15px;
     margin-left: 10px;
+}
+
+.lo-reg-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .lo-reg-btn .btn{
@@ -128,6 +117,7 @@ body{
     background: #fff;
     cursor: pointer;
     transition: .3s ease-in-out;
+    padding-bottom: 0px;
 }
 
 /*Hoverek*/
@@ -145,7 +135,8 @@ body{
     box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
 }
 
-.input-field:hover, .input-field:focus{
+.input-field:hover, .input-field:focus ,
+.textbox:hover, .textbox:focus{
     background: #fff;
 }
 
@@ -158,50 +149,64 @@ body{
     text-decoration: underline;
 }
 
-#passBtn:hover{
+.passBtn:hover{
     box-shadow: none;
 }
 
 /*Div*/
+.input-box {
+  position: relative;
+  margin-bottom: 20px;
+}
 
-.input-field{
+.input-field {
     font-size: 15px;
     background: #fff;
     color: #000;
     height: 50px;
     width: 100%;
-    padding: 0 10px 0 45px;
+    padding: 0 10px 0 45px;  
     border: 1px solid black;
     border-radius: 30px;
     outline: none;
-    display: flex;
     transition: .2s ease;
+}
+
+.form-box, .login-container {
+    height: auto;
 }
 
 /*Iconok*/
 
-.input-box i{
-    position: relative;
-    top: -35px;
-    left: 17px;
-    color: #000;
+.input-box i {
+  position: absolute;
+  left: 17px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
+
 .dropdown i {
-    top: -57px;
+    position: absolute;
+    left: 17px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000;
+    font-size: 18px;
     z-index: 100;
 }
 
-.input-box img{
-    float: right;
-    position: relative;
+.input-box i.fa-eye, .input-box i.fa-eye-slash { 
+    position: absolute !important;
+    right: 17px; 
+    top: 50%;
+    transform: translateY(-50%);
+    left: 420px;
     cursor: pointer;
-    height: 30px;
-    width: 35px;
-    bottom: 40px;
-    right: 17px;
+    font-size: 18px;
+    z-index: 2;
+    color: #000;
 }
-
 
 /*Csuszka eltuntetes*/
 
@@ -221,7 +226,6 @@ input[type="number"]{
     justify-content: space-between;
     color: #000;
     font-size: small;
-    margin-top: 15px;
 }
 .two-col .one{
     display: flex;
@@ -247,48 +251,46 @@ header{
     position: relative;
     width: 100%;
     height: 50px;
-    margin-bottom: 20px;
-}
+    margin-bottom: 0px;}
 
-.dropdown::before{
+.dropdown::before {
     content: "";
     position: absolute;
     right: 20px;
-    top: 15px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);  
     z-index: 100;
     width: 8px;
     height: 8px;    
     border: 1px solid black;
     border-top: 1px solid #fff;
     border-right: 1px solid #fff;
-    transform: rotate(-45deg);
     transition: 0.5s;
     pointer-events: none;
 }
 
-.dropdown.active::before{
-    top: 22px;
-    transform: rotate(-225deg);
+.dropdown.active::before {
+    transform: translateY(-50%) rotate(135deg);  
 }
 
-.dropdown input{
+.dropdown input {
     position: relative;
     z-index: 1; 
     height: 50px;
     width: 100%;
     cursor: pointer;
-    border: none;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05); 
     font-size: 15px;
     background: #fff;
     color: #000;
-    padding: 0 10px 0 45px;
+    padding: 0 50px 0 50px;  
     border: 1px solid black;
     border-radius: 30px;
     outline: none;
     transition: .2s ease;
-    margin-bottom: 20px;
+    margin-bottom: 0; 
+    box-shadow: none;  
 }
+
 
 .dropdown .option{
     position: absolute;
@@ -304,11 +306,20 @@ header{
 
 
 .dropdown.active .option{
-display: block;
+    display: block;
 }
 
-.dropdown .option div{
-    padding: 12px 50px;
+.dropdown .option div {
+    padding: 12px 20px;  
     cursor: pointer;
+    border-bottom: 1px solid #eee;  
 }
 
+.dropdown .option div:last-child {
+    border-bottom: none;
+}
+
+.input-field:hover, .input-field:focus {
+    background: #fff;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1); 
+}
