@@ -1,4 +1,4 @@
-     // Valtas animacio
+// Valtas animacio
 var a = document.getElementsByClassName("loginBtn");
 var b = document.getElementsByClassName("registerBtn");
 var c = document.getElementsByClassName("passBtn");
@@ -50,20 +50,22 @@ function Jelszo() {
 
 //Eletkor
 const input = document.getElementById("myNumber");
-input.addEventListener("input", () => {
-  if (input.value.length > 2) {
-    input.value = input.value.slice(0, 2);
-  }
-});
+if (input){
+  input.addEventListener("input", () => {
+    if (input.value.length > 2) {
+      input.value = input.value.slice(0, 2);
+    }
+  });
 
-input.addEventListener("blur", () => {
-  let value = parseInt(input.value, 10);
-  let min = parseInt(input.min, 10);
-  let max = parseInt(input.max, 10);
-  if (isNaN(value)) return; 
-  if (value < min) input.value = min;
-  if (value > max) input.value = max;
-});
+  input.addEventListener("blur", () => {
+    let value = parseInt(input.value, 10);
+    let min = parseInt(input.min, 10);
+    let max = parseInt(input.max, 10);
+    if (isNaN(value)) return; 
+    if (value < min) input.value = min;
+    if (value > max) input.value = max;
+  });
+}
 
 
 //Lenyilo valasztasnal
@@ -146,3 +148,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+//Dark-Light Mode
+
+
+(function(){
+    function setTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('poolchat_theme', theme);
+        document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+        if (theme === 'light') {
+            const el = document.getElementById('light-mode');
+            if (el) el.classList.add('active');
+        } else {
+            const el = document.getElementById('dark-mode');
+            if (el) el.classList.add('active');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const lightBtn = document.getElementById('light-mode');
+        const darkBtn = document.getElementById('dark-mode');
+
+        if (lightBtn) lightBtn.addEventListener('click', () => setTheme('light'));
+        if (darkBtn)  darkBtn.addEventListener('click',  () => setTheme('dark'));
+
+        const stored = localStorage.getItem('poolchat_theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initial = stored || (prefersDark ? 'dark' : 'light');
+
+        setTheme(initial);
+    });
+})();
