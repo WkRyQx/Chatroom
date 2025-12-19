@@ -28,18 +28,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $iskola = $_POST["iskola"] ?? "";
 
         if ($nev === "") {
-            $error = "A név megadása kötelező";
+            $error = ("A név megadása kötelező.");
         } else {
             $hash = password_hash($jelszo, PASSWORD_DEFAULT);
             $stmt = $conn->prepare("INSERT INTO felhasznalo (email, jelszo, neve, neme, eletkor, iskola, mikor_keszult) VALUES (?, ?, ?, ?, ?, ?, NOW())");
             if ($stmt === false) {
-                $error = "Hiba előkészítéskor: " . $conn->error;
+                $error = ("Hiba előkészítéskor: " . $conn->error);
             } else {
                 $stmt->bind_param('ssssis', $email, $hash, $nev,  $neme, $eletkor, $iskola);
                 if ($stmt->execute()) {
-                    $success = "";
+                    $success = ("Sikeres regisztráció! Most már bejelentkezhetsz.");
                 } else {
-                    $error = "Hiba a regisztrációnál: " . $stmt->error;
+                    $error = ("Hiba a regisztrációnál: " . $stmt->error);
                 }
                 $stmt->close();
             }
@@ -50,11 +50,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $jelszo = $_POST["jelszolog"] ?? "";
 
         if ($email === "" || $jelszo === "") {
-            $error = "Add meg az emailt és a jelszót.";
+            $error = ("Add meg az emailt és a jelszót.");
         } else {
             $stmt = $conn->prepare("SELECT id, email, jelszo, neve, neme, eletkor, iskola FROM felhasznalo WHERE email = ?");
             if ($stmt === false) {
-                $error = "Hiba előkészítéskor: " . $conn->error;
+                $error = ("Hiba előkészítéskor: " . $conn->error);
             } else {
                 $stmt->bind_param('s', $email);
                 $stmt->execute();
@@ -77,10 +77,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         header("Location: home.php");
                         exit;
                     } else {
-                        $error = "Hibás email vagy jelszó.";
+                        $error = ("Hibás email vagy jelszó.");
                     }
                 } else {
-                    $error = "Hibás email vagy jelszó.";
+                    $error = ("Hibás email vagy jelszó.");
                 }
 
                 $stmt->close();

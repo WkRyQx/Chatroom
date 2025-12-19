@@ -1,4 +1,4 @@
-Felhasznalo( id , email , neve , iskola , om_aazonosito , neme , jelszo , mikor_keszult , szerepkor_id)
+Felhasznalo( id , email , neve , iskola , neme , jelszo , mikor_keszult , szerepkor_id)
 Uzenetek( uzenet_id , tartalom , mikor_keszult , id)
 Szerepkor( szerepkor_id , megnevezes )
 Velemeny( velemeny_id , tartalom , mikor_keszult , id)

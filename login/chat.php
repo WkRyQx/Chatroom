@@ -23,16 +23,9 @@ if ($conn->connect_error) {
         <link rel="stylesheet" href="style.css">
         <title>Poolchat</title>
     </head>
-    <body>
-    <div>
-        <a href="chat.php">Chat</a>
-    </div>
-    <div>
-        <a href="ujjitasok.php">ujjitasok</a>
-    </div>
-    <div>
-        <a href="profil.php">profil</a>
-    </div>
+            <form method="get" action="home.php">
+                <button type="submit" class="visszaBtn"><i class="fa-solid fa-arrow-left"></i></button>
+            </form>
 
 
 

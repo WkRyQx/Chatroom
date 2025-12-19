@@ -1,66 +1,67 @@
-CREATE TABLE IF NOT EXISTS `Felhasznalo` (
-	`id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
-	`email` VARCHAR(255),
-	`jelszo` VARCHAR(255),
-	`neve` VARCHAR(255),
-	`om_azonosito` INTEGER,
-	`neme` VARCHAR(255),
-	`eletkor` INTEGER,
-	`iskola` VARCHAR(255),
-	`mikor_keszult` DATE COMMENT 'fiok letrehozas idopont',
-	PRIMARY KEY(`id`)
+CREATE TABLE IF NOT EXISTS Szerepkor (
+    szerepkor_id INT AUTO_INCREMENT PRIMARY KEY,
+    megnevezes VARCHAR(255)
 );
 
-
-CREATE TABLE IF NOT EXISTS `Szerepkor` (
-	`szerepkor_ID` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
-	`megnevezes` VARCHAR(255),
-	PRIMARY KEY(`szerepkor_ID`)
+CREATE TABLE IF NOT EXISTS Felhasznalo (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255),
+    jelszo VARCHAR(255),
+    neve VARCHAR(255),
+    neme VARCHAR(50),
+    eletkor INT,
+    iskola VARCHAR(255),
+    mikor_keszult DATETIME,
+    szerepkor_id INT,
+    FOREIGN KEY (szerepkor_id) REFERENCES Szerepkor(szerepkor_id)
 );
 
-
-CREATE TABLE IF NOT EXISTS `Uzenetek` (
-	`uzenet_id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
-	`tartalom` TEXT(65535),
-	`mikor_keszult` DATE,
-	PRIMARY KEY(`uzenet_id`)
+CREATE TABLE IF NOT EXISTS Uzenetek (
+    uzenet_id INT AUTO_INCREMENT PRIMARY KEY,
+    tartalom TEXT,
+    mikor_keszult DATETIME,
+    id INT,
+    FOREIGN KEY (id) REFERENCES Felhasznalo(id)
 );
 
-
-CREATE TABLE IF NOT EXISTS `Velemeny` (
-	`velemeny_id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
-	`tartalom` TEXT(65535),
-	`mikor_keszult` DATE,
-	PRIMARY KEY(`velemeny_id`)
+CREATE TABLE IF NOT EXISTS Velemeny (
+    velemeny_id INT AUTO_INCREMENT PRIMARY KEY,
+    tartalom TEXT,
+    mikor_keszult DATETIME,
+    id INT,
+    FOREIGN KEY (id) REFERENCES Felhasznalo(id)
 );
 
-
-CREATE TABLE IF NOT EXISTS `reakciok` (
-	`reakcio_id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
-	`emoji` VARCHAR(255),
-	`mikor_keszult` DATE,
-	PRIMARY KEY(`reakcio_id`)
+CREATE TABLE IF NOT EXISTS Reakciok (
+    reakcio_id INT AUTO_INCREMENT PRIMARY KEY,
+    emoji VARCHAR(50),
+    mikor_keszult DATE
 );
 
-
-CREATE TABLE IF NOT EXISTS `irasjelzes` (
-	`id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
-	`uzenet_id` INTEGER,
-	`mikor_keszult` DATE,
-	PRIMARY KEY(`id`)
+CREATE TABLE IF NOT EXISTS Reagal (
+    id INT,
+    reakcio_id INT,
+    PRIMARY KEY (id, reakcio_id),
+    FOREIGN KEY (id) REFERENCES Felhasznalo(id),
+    FOREIGN KEY (reakcio_id) REFERENCES Reakciok(reakcio_id)
 );
 
-
-CREATE TABLE IF NOT EXISTS `mod naplo` (
-	`action_id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
-	`mikor_keszult` DATE,
-	`target_user_id(FK)` INTEGER,
-	`action_type` VARCHAR(255),
-	`indok` TEXT(65535),
-	`expired_at` DATE,
-	`performed_by_user_id(FK)` VARCHAR(255),
-	`room_id(FK)` INTEGER,
-	PRIMARY KEY(`action_id`)
+CREATE TABLE IF NOT EXISTS Reagalas_Velemenyre (
+    reakcio_id INT,
+    velemeny_id INT,
+    id INT,
+    PRIMARY KEY (reakcio_id, velemeny_id),
+    FOREIGN KEY (id) REFERENCES Felhasznalo(id),
+    FOREIGN KEY (reakcio_id) REFERENCES Reakciok(reakcio_id),
+    FOREIGN KEY (velemeny_id) REFERENCES Velemeny(velemeny_id)
 );
 
-
+CREATE TABLE IF NOT EXISTS Reagalas_Uzenetre (
+    reakcio_id INT,
+    uzenet_id INT,
+    id INT,
+    PRIMARY KEY (reakcio_id, uzenet_id),
+    FOREIGN KEY (id) REFERENCES Felhasznalo(id),
+    FOREIGN KEY (reakcio_id) REFERENCES Reakciok(reakcio_id),
+    FOREIGN KEY (uzenet_id) REFERENCES Uzenetek(uzenet_id)
+);
