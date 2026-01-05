@@ -71,15 +71,5 @@ INSERT INTO Szerepkor (szerepkor_id , megnevezes) VALUES
 (2, 'felhasznalo');
 
 
-INSERT INTO Felhasznalo (id ,email, jelszo, neve, neme, eletkor, iskola, mikor_keszult, szerepkor_id) VALUES (
-    1,
-    'admin@gmail.com',
-    'admin',
-    'Admin',
-    'férfi',
-    20,
-    'Pollák Antal Technikum',
-    NOW(),
-    1
-);
+
 

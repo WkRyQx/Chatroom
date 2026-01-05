@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $error = ("A név megadása kötelező.");
         } else {
             $hash = password_hash($jelszo, PASSWORD_DEFAULT);
-            $stmt = $conn->prepare("INSERT INTO felhasznalo (email, jelszo, neve, neme, eletkor, iskola, mikor_keszult) VALUES (?, ?, ?, ?, ?, ?, NOW())");
+            $stmt = $conn->prepare("INSERT INTO felhasznalo (email, jelszo, neve, neme, eletkor, iskola, mikor_keszult , szerepkor_id) VALUES (?, ?, ?, ?, ?, ?, NOW(), 2)");
             if ($stmt === false) {
                 $error = ("Hiba előkészítéskor: " . $conn->error);
             } else {
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($email === "" || $jelszo === "") {
             $error = ("Add meg az emailt és a jelszót.");
         } else {
-            $stmt = $conn->prepare("SELECT id, email, jelszo, neve, neme, eletkor, iskola FROM felhasznalo WHERE email = ?");
+            $stmt = $conn->prepare("SELECT id, email, jelszo, neve, neme, eletkor, iskola , szerepkor_id FROM felhasznalo WHERE email = ?");
             if ($stmt === false) {
                 $error = ("Hiba előkészítéskor: " . $conn->error);
             } else {
@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $stmt->store_result();
 
                 if ($stmt->num_rows === 1) {
-                    $stmt->bind_result($id, $db_email, $hash, $nev, $neme, $eletkor, $iskola);
+                    $stmt->bind_result($id, $db_email, $hash, $nev, $neme, $eletkor, $iskola , $szerepkor);
                     $stmt->fetch();
 
                     if (password_verify($jelszo, $hash)) {
@@ -73,8 +73,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $_SESSION['user_gender'] = $neme;
                         $_SESSION['user_age'] = $eletkor;
                         $_SESSION['user_school'] = $iskola;
+                        $_SESSION['user_szerepkor'] = $szerepkor;
 
-                        header("Location: home.php");
+                        if($_SESSION['user_szerepkor'] == 2)
+                            header("Location: home.php");
+                        else{
+                            header("Location: home_admin.php");
+                        }
                         exit;
                     } else {
                         $error = ("Hibás email vagy jelszó.");
