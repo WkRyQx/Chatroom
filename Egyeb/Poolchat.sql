@@ -71,5 +71,10 @@ INSERT INTO Szerepkor (szerepkor_id , megnevezes) VALUES
 (2, 'felhasznalo');
 
 
+ALTER TABLE velemeny DROP FOREIGN KEY velemeny_ibfk_1;
 
+ALTER TABLE velemeny 
+ADD CONSTRAINT velemeny_ibfk_1 
+FOREIGN KEY (id) REFERENCES felhasznalo(id) 
+ON DELETE CASCADE;
 

@@ -11,6 +11,14 @@ if ($conn->connect_error) {
     die("Hiba a kapcsolódáskor: " . $conn->connect_error);
 }
 
+
+// Ellenőrizzük, hogy a felhasználó admin-e
+function isAdmin() {
+    return isset($_SESSION['user_szerepkor']) && $_SESSION['user_szerepkor'] == 1;
+}
+
+$goBackUrl = isAdmin() ? 'home_admin.php' : 'home.php';
+
 $velemenyek_szama = 0;
 $velemeny_szamlalo = "SELECT COUNT(*) as count FROM velemeny WHERE id = ?";
 if ($stmt = $conn->prepare($velemeny_szamlalo)) {
@@ -53,12 +61,12 @@ if ($stmt = $conn->prepare($reakcio_szamlalo)) {
         <meta name="viewport" content="width=device-width,minimum-scale=1">
         <link rel="shortcut icon" href="logo.png" type="image/x-icon">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="main.css">
         <title>Poolchat</title>
     </head>
     <body>
         <div class="profil-container">
-            <form method="get" action="home.php">
+            <form method="get" action="<?php echo $goBackUrl; ?>">
                 <button type="submit" class="visszaBtn"><i class="fa-solid fa-arrow-left"></i></button>
             </form>
             <h1>Profil:</h1>

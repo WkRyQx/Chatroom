@@ -20,15 +20,15 @@ if ($conn->connect_error) {
         <meta name="viewport" content="width=device-width,minimum-scale=1">
         <link rel="shortcut icon" href="logo.png" type="image/x-icon">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="main.css">
         <title>Poolchat</title>
     </head>
     <body>
     <div>
-        <a href="chat.php">Chat</a>
+        <a href="F_menedzs.php">Felhasznaló Menedzsment</a>
     </div>
     <div>
-        <a href="ujjitasok.php">ujjitasok</a>
+        <a href="ujjitasok_admin.php">ujjitasok</a>
     </div>
     <div>
         <a href="profil.php">profil</a>

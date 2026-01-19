@@ -150,8 +150,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 //Dark-Light Mode
-
-
 (function(){
     function setTheme(theme) {
         document.body.setAttribute('data-theme', theme);
@@ -182,3 +180,73 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 
 
+//kereses felhasznalok kozott
+let globalUsers = []
+
+async function loadUsers(q = '') {
+  const res = await fetch(`F_menedzs.php?ajax_users=1&q=${encodeURIComponent(q)}`)
+  globalUsers = await res.json()
+  renderUsers()
+}
+
+function renderUsers() {
+  const list = document.getElementById('user-list')
+  list.innerHTML = ''
+
+  if (globalUsers.length === 0) {
+    list.innerHTML = '<p>Nincs találat.</p>'
+    return
+  }
+
+  globalUsers.forEach(u => {
+    const div = document.createElement('div')
+    div.className = 'Felhasznalo'
+
+    div.innerHTML = `
+      <p>${u.id}</p>
+      <p>${u.email}</p>
+      <p>${u.neve}</p>
+      <p>${u.neme}</p>
+      <p>${u.eletkor}</p>
+      <p>${u.iskola}</p>
+      <p>${u.szerepkor}</p>
+    `
+
+    if (u.can_manage) {
+      div.innerHTML += `
+        <form method="post" onsubmit="return confirm('Biztos törölni szeretnéd?');">
+          <input type="hidden" name="delete_felhasznalo" value="1">
+          <input type="hidden" name="felhasznalo_id" value="${u.id}">
+          <button class="torlesBtn"><i class="fa-solid fa-trash"></i></button>
+        </form>
+      `
+    }
+
+    list.appendChild(div)
+  })
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('search')
+  
+  if (!input) return
+
+  let t = null
+  input.addEventListener('input', e => {
+    clearTimeout(t)
+    t = setTimeout(() => {
+      loadUsers(e.target.value)
+    }, 300)
+  })
+
+  loadUsers()
+})
+
+function loadUserForEdit() {
+    const id = document.getElementById('felhasznalo_id_input').value.trim();
+    if (!id) {
+        alert('Kérlek add meg a felhasználó ID-t!');
+        return;
+    }
+    window.location.href = '?edit_id=' + id;
+}

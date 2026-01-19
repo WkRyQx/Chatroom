@@ -15,6 +15,10 @@ $success = "";
 $error = "";
 
 
+function isAdmin() {
+    return isset($_SESSION['user_szerepkor']) && $_SESSION['user_szerepkor'] == 1;
+}
+
 function time_ago_hu($datetimeStr) {
     if (empty($datetimeStr)) return 'Ismeretlen idő';
     try {
@@ -38,6 +42,27 @@ function time_ago_hu($datetimeStr) {
     if ($diffMonths < 12) return $diffMonths . ' hónapja';
     $diffYears = floor($diffDays / 365);
     return $diffYears . ' éve';
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_velemeny'])) {
+
+    if (!isAdmin()) {
+        $error = "Nincs jogosultságod törölni.";
+    } else {
+        $velemeny_id = (int)$_POST['velemeny_id'];
+
+        $stmt = $conn->prepare("DELETE FROM velemeny WHERE velemeny_id = ?");
+        $stmt->bind_param("i", $velemeny_id);
+
+        if ($stmt->execute()) {
+            $_SESSION['success'] = "Vélemény törölve lett.";
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            exit;
+        } else {
+            $error = "Törlés sikertelen.";
+        }
+        $stmt->close();
+    }
 }
 
 $ujjitas = trim($_POST["ujjitas"] ?? "");
@@ -97,6 +122,8 @@ if ($stmt = $conn->prepare($reakcio_szamlalo)) {
 
 }
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -106,7 +133,7 @@ if ($stmt = $conn->prepare($reakcio_szamlalo)) {
         <meta name="viewport" content="width=device-width,minimum-scale=1">
         <link rel="shortcut icon" href="logo.png" type="image/x-icon">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="main.css">
         <title>Poolchat</title>
     </head>
     <body>
@@ -119,33 +146,41 @@ if ($stmt = $conn->prepare($reakcio_szamlalo)) {
             <div class="msg error"><?= $error ?></div>
         <?php endif; ?>
 
-        <form method="get" action="home.php">
+        <form method="get" action="home_admin.php">
             <button type="submit" class="visszaBtn"><i class="fa-solid fa-arrow-left"></i></button>
         </form>
         <h1>Ötletek</h1>
         <div class="ujjitasok-container">
             <div class="velemenyek">
                 <?php
-                $stmt = $conn->prepare("SELECT v.tartalom AS tartalom, v.mikor_keszult AS mikor_keszult, f.neve AS username FROM velemeny v LEFT JOIN felhasznalo f ON v.id = f.id ORDER BY v.mikor_keszult ASC");
-                if ($stmt) {
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                        while ($row = $result->fetch_assoc()) {
-                            echo ("<div class='velemeny-item'>");
-                            $displayName = htmlspecialchars($row['username'] ?? 'Ismeretlen');
-                            $timeAgo = time_ago_hu($row['mikor_keszult']);
-                            echo ("<h3>" . $displayName . " <span class='date'>" . htmlspecialchars($timeAgo) . "</span></h3>");
-                            echo ("<p>" . nl2br(htmlspecialchars($row['tartalom'])) . "</p>");
-                            echo ("<i class='fa-duotone fa-solid fa-fire' style='--fa-primary-color: #b5b5b5; --fa-primary-opacity: 0.5; --fa-secondary-color: #b5b5b5; --fa-secondary-opacity: 50;'> </i>");
-                            echo( htmlspecialchars($reakcio_velemenyre_szama ?? 0));
-                            echo ("</div>");
-                        }
-                    $stmt->close();
-                }
+                $stmt = $conn->prepare("SELECT v.velemeny_id AS id ,v.tartalom AS tartalom, v.mikor_keszult AS mikor_keszult, f.neve AS username FROM velemeny v LEFT JOIN felhasznalo f ON v.id = f.id ORDER BY v.mikor_keszult ASC");
+                $stmt->execute();
+                $result = $stmt->get_result();
+                        
+                while ($row = $result->fetch_assoc()):
                 ?>
-            </div>
-        </div>
-
+                    <div class="velemeny-item">
+                        <h3>
+                            <?= htmlspecialchars($row['username'] ?? 'Ismeretlen') ?>
+                            <span class="date"><?= time_ago_hu($row['mikor_keszult']) ?></span>
+                        </h3>
+                
+                        <p><?= nl2br(htmlspecialchars($row['tartalom'])) ?></p>
+                
+                        <?php if (isAdmin()): ?>
+                            <form method="post" onsubmit="return confirm('Biztos törölni szeretnéd?');">
+                                <input type="hidden" name="delete_velemeny" value="1">
+                                <input type="hidden" name="velemeny_id" value="<?= $row['id'] ?>">
+                                <button type="submit" class="torlesBtn">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        <?php endif; ?>
+                    </div>
+                <?php endwhile; $stmt->close(); ?>
+                </div>
+                        
+                        
     <script src="main.js"></script>
     </body>
 </html>
